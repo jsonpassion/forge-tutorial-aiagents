@@ -1,0 +1,733 @@
+{
+  "title": "2026: AI Agents 실전 완전 정복",
+  "subtitle": "20챕터 97섹션 튜토리얼",
+  "version": "1.0.0",
+  "lastUpdated": "2026-03-22",
+  "language": "ko",
+  "author": "Jason",
+  "chapters": [
+    {
+      "id": "01-ch1-llm-도구-호출의-이해",
+      "title": "Ch1. LLM 도구 호출의 이해",
+      "description": "LLM의 Tool Calling 메커니즘을 깊이 이해하고, OpenAI/Anthropic API에서 함수 정의·호출·결과 반환의 전체 흐름을 직접 구현한다.",
+      "sections": [
+        {
+          "id": "01-01-ai-에이전트란-무엇인가",
+          "title": "01. AI 에이전트란 무엇인가",
+          "file": "01-ch1-llm-도구-호출의-이해/01-01-ai-에이전트란-무엇인가.md",
+          "description": "에이전트의 정의, 자율성 스펙트럼(워크플로우 vs 에이전트), 2026년 에이전트 생태계 개관"
+        },
+        {
+          "id": "02-02-llm-tool-calling-메커니즘",
+          "title": "02. LLM Tool Calling 메커니즘",
+          "file": "01-ch1-llm-도구-호출의-이해/02-02-llm-tool-calling-메커니즘.md",
+          "description": "Tool Calling의 내부 동작 원리, Function Calling과의 관계, 도구 정의 JSON Schema 구조"
+        },
+        {
+          "id": "03-03-openai-api-도구-호출-실습",
+          "title": "03. OpenAI API 도구 호출 실습",
+          "file": "01-ch1-llm-도구-호출의-이해/03-03-openai-api-도구-호출-실습.md",
+          "description": "OpenAI chat completions API로 도구 정의, tool_choice 제어, 병렬 도구 호출(parallel tool calls) 처리"
+        },
+        {
+          "id": "04-04-anthropic-api-도구-호출-실습",
+          "title": "04. Anthropic API 도구 호출 실습",
+          "file": "01-ch1-llm-도구-호출의-이해/04-04-anthropic-api-도구-호출-실습.md",
+          "description": "Anthropic Messages API tool_use 블록, 도구 결과 반환, 스트리밍 환경에서의 도구 호출"
+        },
+        {
+          "id": "05-05-도구-실행-엔진-구축",
+          "title": "05. 도구 실행 엔진 구축",
+          "file": "01-ch1-llm-도구-호출의-이해/05-05-도구-실행-엔진-구축.md",
+          "description": "도구 레지스트리 설계, 동적 함수 디스패치, 에러 핸들링과 재시도 전략, 도구 호출 로깅"
+        }
+      ]
+    },
+    {
+      "id": "02-ch2-react-패턴과-에이전트-루프",
+      "title": "Ch2. ReAct 패턴과 에이전트 루프",
+      "description": "ReAct(Reasoning + Acting) 패턴의 이론적 배경을 학습하고, Thought-Action-Observation 루프를 처음부터 직접 구현하여 에이전트의 핵심 작동 원리를 체득한다.",
+      "sections": [
+        {
+          "id": "01-01-react-패턴-이론",
+          "title": "01. ReAct 패턴 이론",
+          "file": "02-ch2-react-패턴과-에이전트-루프/01-01-react-패턴-이론.md",
+          "description": "Yao et al. 논문 핵심 분석, Reasoning과 Acting의 시너지, CoT/Act-only 대비 ReAct의 장점"
+        },
+        {
+          "id": "02-02-react-루프-직접-구현",
+          "title": "02. ReAct 루프 직접 구현",
+          "file": "02-ch2-react-패턴과-에이전트-루프/02-02-react-루프-직접-구현.md",
+          "description": "Thought-Action-Observation 루프를 순수 Python으로 구현, 프롬프트 템플릿 설계, 파싱 전략"
+        },
+        {
+          "id": "03-03-에이전트-종료-조건과-안전장치",
+          "title": "03. 에이전트 종료 조건과 안전장치",
+          "file": "02-ch2-react-패턴과-에이전트-루프/03-03-에이전트-종료-조건과-안전장치.md",
+          "description": "최대 반복 횟수, 종료 토큰 감지, 무한 루프 방지, 토큰 사용량 제한"
+        },
+        {
+          "id": "04-04-langgraph의-create-react-agent",
+          "title": "04. LangGraph의 create_react_agent",
+          "file": "02-ch2-react-패턴과-에이전트-루프/04-04-langgraph의-create-react-agent.md",
+          "description": "LangGraph 내장 ReAct 에이전트 생성, 도구 바인딩, 시스템 프롬프트 커스터마이징"
+        },
+        {
+          "id": "05-05-react-에이전트-실전-프로젝트",
+          "title": "05. ReAct 에이전트 실전 프로젝트",
+          "file": "02-ch2-react-패턴과-에이전트-루프/05-05-react-에이전트-실전-프로젝트.md",
+          "description": "웹 검색 + 계산기 + 코드 실행 도구를 결합한 리서치 에이전트 구축"
+        }
+      ]
+    },
+    {
+      "id": "03-ch3-대화-메모리와-상태-관리",
+      "title": "Ch3. 대화 메모리와 상태 관리",
+      "description": "에이전트의 대화 메모리 구조를 이해하고, 단기/장기 메모리 전략과 컨텍스트 윈도우 관리 기법을 실습한다.",
+      "sections": [
+        {
+          "id": "01-01-대화-메모리의-기초",
+          "title": "01. 대화 메모리의 기초",
+          "file": "03-ch3-대화-메모리와-상태-관리/01-01-대화-메모리의-기초.md",
+          "description": "메시지 히스토리 관리, 버퍼 메모리 vs 요약 메모리, 컨텍스트 윈도우 한계와 대응"
+        },
+        {
+          "id": "02-02-슬라이딩-윈도우와-토큰-관리",
+          "title": "02. 슬라이딩 윈도우와 토큰 관리",
+          "file": "03-ch3-대화-메모리와-상태-관리/02-02-슬라이딩-윈도우와-토큰-관리.md",
+          "description": "메시지 트리밍 전략, 토큰 카운팅, 요약 기반 압축, 중요 메시지 보존"
+        },
+        {
+          "id": "03-03-langgraph-메시지-상태",
+          "title": "03. LangGraph 메시지 상태",
+          "file": "03-ch3-대화-메모리와-상태-관리/03-03-langgraph-메시지-상태.md",
+          "description": "MessagesState 활용, add_messages 리듀서, 메시지 수정과 삭제, RemoveMessage 패턴"
+        },
+        {
+          "id": "04-04-장기-메모리-구현",
+          "title": "04. 장기 메모리 구현",
+          "file": "03-ch3-대화-메모리와-상태-관리/04-04-장기-메모리-구현.md",
+          "description": "외부 저장소(SQLite, Redis) 기반 장기 메모리, 사용자별 메모리 네임스페이스, 메모리 검색"
+        },
+        {
+          "id": "05-05-멀티턴-에이전트-실습",
+          "title": "05. 멀티턴 에이전트 실습",
+          "file": "03-ch3-대화-메모리와-상태-관리/05-05-멀티턴-에이전트-실습.md",
+          "description": "메모리를 활용한 멀티턴 대화 에이전트 구축, 세션 관리, 사용자 선호도 학습"
+        }
+      ]
+    },
+    {
+      "id": "04-ch4-langgraph-stategraph-기초",
+      "title": "Ch4. LangGraph StateGraph 기초",
+      "description": "LangGraph의 핵심인 StateGraph를 학습한다. 상태 정의, 노드 추가, 엣지 연결의 기본 패턴을 익히고 첫 번째 그래프를 구축한다.",
+      "sections": [
+        {
+          "id": "01-01-langgraph-아키텍처-개관",
+          "title": "01. LangGraph 아키텍처 개관",
+          "file": "04-ch4-langgraph-stategraph-기초/01-01-langgraph-아키텍처-개관.md",
+          "description": "LangGraph 설계 철학, Pregel/Apache Beam 영감, LangChain과의 관계, 독립 사용 가능성"
+        },
+        {
+          "id": "02-02-상태-스키마-정의",
+          "title": "02. 상태 스키마 정의",
+          "file": "04-ch4-langgraph-stategraph-기초/02-02-상태-스키마-정의.md",
+          "description": "TypedDict 기반 상태, Pydantic 모델 활용, Annotated 타입과 리듀서, 상태 채널 개념"
+        },
+        {
+          "id": "03-03-노드와-엣지-구성",
+          "title": "03. 노드와 엣지 구성",
+          "file": "04-ch4-langgraph-stategraph-기초/03-03-노드와-엣지-구성.md",
+          "description": "노드 함수 작성, add_node/add_edge API, START/END 노드, 그래프 컴파일과 실행"
+        },
+        {
+          "id": "04-04-리듀서와-상태-업데이트-패턴",
+          "title": "04. 리듀서와 상태 업데이트 패턴",
+          "file": "04-ch4-langgraph-stategraph-기초/04-04-리듀서와-상태-업데이트-패턴.md",
+          "description": "add 리듀서, 커스텀 리듀서 작성, 상태 병합 전략, 불변성과 부수효과 관리"
+        },
+        {
+          "id": "05-05-첫-번째-langgraph-에이전트",
+          "title": "05. 첫 번째 LangGraph 에이전트",
+          "file": "04-ch4-langgraph-stategraph-기초/05-05-첫-번째-langgraph-에이전트.md",
+          "description": "도구 호출 에이전트를 StateGraph로 구축, 그래프 시각화, 단계별 실행 추적"
+        }
+      ]
+    },
+    {
+      "id": "05-ch5-조건-분기와-동적-라우팅",
+      "title": "Ch5. 조건 분기와 동적 라우팅",
+      "description": "add_conditional_edges를 활용한 동적 라우팅, 복잡한 분기 로직 설계, 서브그래프 합성을 학습한다.",
+      "sections": [
+        {
+          "id": "01-01-조건부-엣지의-이해",
+          "title": "01. 조건부 엣지의 이해",
+          "file": "05-ch5-조건-분기와-동적-라우팅/01-01-조건부-엣지의-이해.md",
+          "description": "add_conditional_edges API, 라우팅 함수 작성, 다중 분기 패턴, 기본 경로 설정"
+        },
+        {
+          "id": "02-02-복잡한-라우팅-전략",
+          "title": "02. 복잡한 라우팅 전략",
+          "file": "05-ch5-조건-분기와-동적-라우팅/02-02-복잡한-라우팅-전략.md",
+          "description": "LLM 기반 라우팅, 상태 기반 분기, 에러 라우팅, 폴백 경로 설계"
+        },
+        {
+          "id": "03-03-서브그래프와-그래프-합성",
+          "title": "03. 서브그래프와 그래프 합성",
+          "file": "05-ch5-조건-분기와-동적-라우팅/03-03-서브그래프와-그래프-합성.md",
+          "description": "서브그래프 정의와 중첩, 상태 매핑, 부모-자식 그래프 간 데이터 전달"
+        },
+        {
+          "id": "04-04-맵-리듀스-병렬-처리",
+          "title": "04. 맵-리듀스 병렬 처리",
+          "file": "05-ch5-조건-분기와-동적-라우팅/04-04-맵-리듀스-병렬-처리.md",
+          "description": "Send API로 동적 병렬 노드 생성, 팬아웃/팬인 패턴, 결과 집계 전략"
+        },
+        {
+          "id": "05-05-의사결정-에이전트-실습",
+          "title": "05. 의사결정 에이전트 실습",
+          "file": "05-ch5-조건-분기와-동적-라우팅/05-05-의사결정-에이전트-실습.md",
+          "description": "복합 조건 분기를 활용한 고객 지원 라우팅 에이전트 구축"
+        }
+      ]
+    },
+    {
+      "id": "06-ch6-체크포인트와-영속적-실행",
+      "title": "Ch6. 체크포인트와 영속적 실행",
+      "description": "LangGraph의 체크포인트 시스템으로 그래프 실행 상태를 저장·복원하고, 장기 실행 워크플로우와 타임 트래블 디버깅을 구현한다.",
+      "sections": [
+        {
+          "id": "01-01-체크포인트-시스템-이해",
+          "title": "01. 체크포인트 시스템 이해",
+          "file": "06-ch6-체크포인트와-영속적-실행/01-01-체크포인트-시스템-이해.md",
+          "description": "체크포인터 아키텍처, 스냅샷 구조, thread_id와 checkpoint_id, 상태 직렬화"
+        },
+        {
+          "id": "02-02-메모리-및-sqlite-체크포인터",
+          "title": "02. 메모리 및 SQLite 체크포인터",
+          "file": "06-ch6-체크포인트와-영속적-실행/02-02-메모리-및-sqlite-체크포인터.md",
+          "description": "MemorySaver 활용, SqliteSaver/PostgresSaver 설정, 체크포인터 성능 비교"
+        },
+        {
+          "id": "03-03-멀티-세션과-스레드-관리",
+          "title": "03. 멀티 세션과 스레드 관리",
+          "file": "06-ch6-체크포인트와-영속적-실행/03-03-멀티-세션과-스레드-관리.md",
+          "description": "thread_id 기반 대화 격리, 세션 목록 조회, 스레드별 상태 관리, 동시 실행 처리"
+        },
+        {
+          "id": "04-04-타임-트래블과-상태-복원",
+          "title": "04. 타임 트래블과 상태 복원",
+          "file": "06-ch6-체크포인트와-영속적-실행/04-04-타임-트래블과-상태-복원.md",
+          "description": "get_state_history로 실행 이력 조회, 특정 체크포인트로 롤백, 포크(fork) 실행"
+        },
+        {
+          "id": "05-05-장기-실행-워크플로우-구축",
+          "title": "05. 장기 실행 워크플로우 구축",
+          "file": "06-ch6-체크포인트와-영속적-실행/05-05-장기-실행-워크플로우-구축.md",
+          "description": "비동기 작업 대기, 외부 이벤트 수신, 체크포인트 기반 장기 프로세스 관리 실습"
+        }
+      ]
+    },
+    {
+      "id": "07-ch7-human-in-the-loop-워크플로우",
+      "title": "Ch7. Human-in-the-Loop 워크플로우",
+      "description": "에이전트 실행 중 사람의 승인·수정·피드백을 받는 Human-in-the-Loop 패턴을 학습하고, 안전한 에이전트 운영 워크플로우를 설계한다.",
+      "sections": [
+        {
+          "id": "01-01-human-in-the-loop-패턴-개관",
+          "title": "01. Human-in-the-Loop 패턴 개관",
+          "file": "07-ch7-human-in-the-loop-워크플로우/01-01-human-in-the-loop-패턴-개관.md",
+          "description": "HITL의 필요성, 승인/수정/피드백 패턴 분류, LangGraph의 interrupt 메커니즘"
+        },
+        {
+          "id": "02-02-도구-호출-승인-워크플로우",
+          "title": "02. 도구 호출 승인 워크플로우",
+          "file": "07-ch7-human-in-the-loop-워크플로우/02-02-도구-호출-승인-워크플로우.md",
+          "description": "interrupt_before/interrupt_after 설정, 위험한 도구 식별, 승인 UI 연동 패턴"
+        },
+        {
+          "id": "03-03-상태-수정과-피드백-주입",
+          "title": "03. 상태 수정과 피드백 주입",
+          "file": "07-ch7-human-in-the-loop-워크플로우/03-03-상태-수정과-피드백-주입.md",
+          "description": "update_state로 에이전트 상태 수정, 사람의 피드백을 그래프 상태에 반영, Command 패턴"
+        },
+        {
+          "id": "04-04-동적-중단점과-조건부-승인",
+          "title": "04. 동적 중단점과 조건부 승인",
+          "file": "07-ch7-human-in-the-loop-워크플로우/04-04-동적-중단점과-조건부-승인.md",
+          "description": "NodeInterrupt 예외, 조건부 중단(금액 임계값 등), 동적 중단점 생성"
+        },
+        {
+          "id": "05-05-hitl-실전-프로젝트",
+          "title": "05. HITL 실전 프로젝트",
+          "file": "07-ch7-human-in-the-loop-워크플로우/05-05-hitl-실전-프로젝트.md",
+          "description": "주문 처리 에이전트: 가격 확인→사람 승인→결제 실행 워크플로우 구축"
+        }
+      ]
+    },
+    {
+      "id": "08-ch8-커스텀-도구-개발",
+      "title": "Ch8. 커스텀 도구 개발",
+      "description": "에이전트가 사용할 커스텀 도구를 체계적으로 설계·개발하고, 도구 스키마 최적화, 에러 처리, 테스트 전략을 학습한다.",
+      "sections": [
+        {
+          "id": "01-01-tool-데코레이터-심화",
+          "title": "01. @tool 데코레이터 심화",
+          "file": "08-ch8-커스텀-도구-개발/01-01-tool-데코레이터-심화.md",
+          "description": "@tool 데코레이터 옵션, docstring 기반 스키마 생성, args_schema 커스터마이징"
+        },
+        {
+          "id": "02-02-복합-도구-설계-패턴",
+          "title": "02. 복합 도구 설계 패턴",
+          "file": "08-ch8-커스텀-도구-개발/02-02-복합-도구-설계-패턴.md",
+          "description": "다중 파라미터 도구, 중첩 객체 입력, 파일 입출력 도구, 상태를 가진 도구(InjectedState)"
+        },
+        {
+          "id": "03-03-비동기-도구와-외부-api-연동",
+          "title": "03. 비동기 도구와 외부 API 연동",
+          "file": "08-ch8-커스텀-도구-개발/03-03-비동기-도구와-외부-api-연동.md",
+          "description": "async 도구 구현, httpx 기반 외부 API 호출, 타임아웃과 재시도, rate limiting"
+        },
+        {
+          "id": "04-04-도구-에러-핸들링",
+          "title": "04. 도구 에러 핸들링",
+          "file": "08-ch8-커스텀-도구-개발/04-04-도구-에러-핸들링.md",
+          "description": "ToolException 활용, handle_tool_error 콜백, 에러 메시지 포맷팅, 폴백 도구 체인"
+        },
+        {
+          "id": "05-05-도구-테스트와-모킹",
+          "title": "05. 도구 테스트와 모킹",
+          "file": "08-ch8-커스텀-도구-개발/05-05-도구-테스트와-모킹.md",
+          "description": "도구 단위 테스트, LLM 호출 모킹, 도구 통합 테스트, 도구 성능 벤치마킹"
+        }
+      ]
+    },
+    {
+      "id": "09-ch9-mcp-서버-구축",
+      "title": "Ch9. MCP 서버 구축",
+      "description": "Model Context Protocol(MCP) 서버를 Python FastMCP로 구축하여 도구·리소스·프롬프트를 외부에 노출하는 방법을 학습한다.",
+      "sections": [
+        {
+          "id": "01-01-mcp-프로토콜-이해",
+          "title": "01. MCP 프로토콜 이해",
+          "file": "09-ch9-mcp-서버-구축/01-01-mcp-프로토콜-이해.md",
+          "description": "MCP 탄생 배경, 아키텍처(Host/Client/Server), 프로토콜 스펙(2025-11-25) 핵심 개념"
+        },
+        {
+          "id": "02-02-fastmcp-서버-기초",
+          "title": "02. FastMCP 서버 기초",
+          "file": "09-ch9-mcp-서버-구축/02-02-fastmcp-서버-기초.md",
+          "description": "FastMCP 설치, @mcp.tool()로 도구 노출, @mcp.resource()로 데이터 제공, 서버 실행"
+        },
+        {
+          "id": "03-03-리소스와-프롬프트-설계",
+          "title": "03. 리소스와 프롬프트 설계",
+          "file": "09-ch9-mcp-서버-구축/03-03-리소스와-프롬프트-설계.md",
+          "description": "리소스 URI 체계, 리소스 템플릿, @mcp.prompt()로 프롬프트 노출, 동적 컨텍스트 제공"
+        },
+        {
+          "id": "04-04-트랜스포트-설정",
+          "title": "04. 트랜스포트 설정",
+          "file": "09-ch9-mcp-서버-구축/04-04-트랜스포트-설정.md",
+          "description": "stdio 트랜스포트, HTTP+SSE 트랜스포트, Streamable HTTP, 보안 설정과 인증"
+        },
+        {
+          "id": "05-05-mcp-서버-실전-프로젝트",
+          "title": "05. MCP 서버 실전 프로젝트",
+          "file": "09-ch9-mcp-서버-구축/05-05-mcp-서버-실전-프로젝트.md",
+          "description": "데이터베이스 조회 + 파일 관리 기능을 제공하는 MCP 서버 구축과 테스트"
+        }
+      ]
+    },
+    {
+      "id": "10-ch10-mcp-클라이언트와-에이전트-통합",
+      "title": "Ch10. MCP 클라이언트와 에이전트 통합",
+      "description": "MCP 클라이언트를 구축하여 MCP 서버와 통신하고, LangGraph 에이전트에 MCP 도구를 통합하는 방법을 학습한다.",
+      "sections": [
+        {
+          "id": "01-01-mcp-클라이언트-구축",
+          "title": "01. MCP 클라이언트 구축",
+          "file": "10-ch10-mcp-클라이언트와-에이전트-통합/01-01-mcp-클라이언트-구축.md",
+          "description": "ClientSession 생성, stdio 연결, 도구 목록 조회(list_tools), 도구 호출(call_tool)"
+        },
+        {
+          "id": "02-02-mcp-도구와-llm-연동",
+          "title": "02. MCP 도구와 LLM 연동",
+          "file": "10-ch10-mcp-클라이언트와-에이전트-통합/02-02-mcp-도구와-llm-연동.md",
+          "description": "MCP 도구 스키마를 LLM 도구 형식으로 변환, 도구 호출 결과 처리, 대화 루프 구축"
+        },
+        {
+          "id": "03-03-langgraph-mcp-통합",
+          "title": "03. LangGraph + MCP 통합",
+          "file": "10-ch10-mcp-클라이언트와-에이전트-통합/03-03-langgraph-mcp-통합.md",
+          "description": "MCP 도구를 LangGraph ToolNode에 연결, 상태 그래프에서 MCP 도구 사용, 동적 도구 로딩"
+        },
+        {
+          "id": "04-04-다중-mcp-서버-관리",
+          "title": "04. 다중 MCP 서버 관리",
+          "file": "10-ch10-mcp-클라이언트와-에이전트-통합/04-04-다중-mcp-서버-관리.md",
+          "description": "여러 MCP 서버 동시 연결, 도구 네임스페이스 관리, 서버 장애 대응, 연결 풀링"
+        },
+        {
+          "id": "05-05-mcp-에이전트-실전-프로젝트",
+          "title": "05. MCP 에이전트 실전 프로젝트",
+          "file": "10-ch10-mcp-클라이언트와-에이전트-통합/05-05-mcp-에이전트-실전-프로젝트.md",
+          "description": "GitHub + Slack + DB MCP 서버를 연동한 DevOps 지원 에이전트 구축"
+        }
+      ]
+    },
+    {
+      "id": "11-ch11-a2a-프로토콜-기초",
+      "title": "Ch11. A2A 프로토콜 기초",
+      "description": "Google 주도의 Agent-to-Agent(A2A) 프로토콜을 학습하고, 에이전트 간 통신과 상호운용성의 기초를 다진다.",
+      "sections": [
+        {
+          "id": "01-01-a2a-프로토콜-개관",
+          "title": "01. A2A 프로토콜 개관",
+          "file": "11-ch11-a2a-프로토콜-기초/01-01-a2a-프로토콜-개관.md",
+          "description": "A2A 탄생 배경, MCP vs A2A 역할 구분, 핵심 개념(Agent Card, Task, Artifact, Message)"
+        },
+        {
+          "id": "02-02-agent-card와-능력-선언",
+          "title": "02. Agent Card와 능력 선언",
+          "file": "11-ch11-a2a-프로토콜-기초/02-02-agent-card와-능력-선언.md",
+          "description": "Agent Card JSON 스키마, 스킬 정의, 인증 설정, 에이전트 디스커버리 메커니즘"
+        },
+        {
+          "id": "03-03-태스크-기반-통신-구현",
+          "title": "03. 태스크 기반 통신 구현",
+          "file": "11-ch11-a2a-프로토콜-기초/03-03-태스크-기반-통신-구현.md",
+          "description": "태스크 생성/조회/취소, Message와 Part 구조, 스트리밍 응답(SSE), 장기 실행 태스크"
+        },
+        {
+          "id": "04-04-mcp-a2a-통합-아키텍처",
+          "title": "04. MCP + A2A 통합 아키텍처",
+          "file": "11-ch11-a2a-프로토콜-기초/04-04-mcp-a2a-통합-아키텍처.md",
+          "description": "MCP(도구 접근) + A2A(에이전트 간 협업) 조합 패턴, 실전 아키텍처 설계, 구매 도우미 예제"
+        }
+      ]
+    },
+    {
+      "id": "12-ch12-agentic-rag-에이전트가-검색을-도구로-활용",
+      "title": "Ch12. Agentic RAG — 에이전트가 검색을 도구로 활용",
+      "description": "에이전트가 RAG 파이프라인을 도구로 활용하는 Agentic RAG 패턴을 학습하고, 자기교정(Self-Corrective) RAG를 구현한다.",
+      "sections": [
+        {
+          "id": "01-01-rag에서-agentic-rag로",
+          "title": "01. RAG에서 Agentic RAG로",
+          "file": "12-ch12-agentic-rag-에이전트가-검색을-도구로-활용/01-01-rag에서-agentic-rag로.md",
+          "description": "기존 RAG의 한계, Agentic RAG 개념, 검색을 도구로 래핑하는 패턴, 에이전트 루프 내 검색"
+        },
+        {
+          "id": "02-02-검색-도구-구축",
+          "title": "02. 검색 도구 구축",
+          "file": "12-ch12-agentic-rag-에이전트가-검색을-도구로-활용/02-02-검색-도구-구축.md",
+          "description": "벡터 스토어 검색 도구, BM25 키워드 검색 도구, 웹 검색 도구, 도구 설명 최적화"
+        },
+        {
+          "id": "03-03-검색-결과-평가와-필터링",
+          "title": "03. 검색 결과 평가와 필터링",
+          "file": "12-ch12-agentic-rag-에이전트가-검색을-도구로-활용/03-03-검색-결과-평가와-필터링.md",
+          "description": "LLM 기반 관련성 평가(Grading), 할루시네이션 검출, 답변 품질 검증, 재검색 트리거"
+        },
+        {
+          "id": "04-04-자기교정-rag-구현",
+          "title": "04. 자기교정 RAG 구현",
+          "file": "12-ch12-agentic-rag-에이전트가-검색을-도구로-활용/04-04-자기교정-rag-구현.md",
+          "description": "Corrective RAG 패턴, 검색→평가→수정 루프, 웹 검색 폴백, 최대 반복 제한"
+        },
+        {
+          "id": "05-05-agentic-rag-실전-프로젝트",
+          "title": "05. Agentic RAG 실전 프로젝트",
+          "file": "12-ch12-agentic-rag-에이전트가-검색을-도구로-활용/05-05-agentic-rag-실전-프로젝트.md",
+          "description": "기술 문서 Q&A 에이전트: 벡터 검색 + 웹 검색 + 자기교정 통합 시스템 구축"
+        }
+      ]
+    },
+    {
+      "id": "13-ch13-adaptive-rag와-동적-라우팅",
+      "title": "Ch13. Adaptive RAG와 동적 라우팅",
+      "description": "쿼리 특성에 따라 No Retrieval, Single-shot, Iterative RAG를 동적으로 선택하는 Adaptive RAG 시스템을 구현한다.",
+      "sections": [
+        {
+          "id": "01-01-adaptive-rag-아키텍처",
+          "title": "01. Adaptive RAG 아키텍처",
+          "file": "13-ch13-adaptive-rag와-동적-라우팅/01-01-adaptive-rag-아키텍처.md",
+          "description": "쿼리 복잡도 분석, No Retrieval/Single-shot/Iterative 전략 분류, 라우팅 그래프 설계"
+        },
+        {
+          "id": "02-02-쿼리-분석과-라우터-구현",
+          "title": "02. 쿼리 분석과 라우터 구현",
+          "file": "13-ch13-adaptive-rag와-동적-라우팅/02-02-쿼리-분석과-라우터-구현.md",
+          "description": "LLM 기반 쿼리 분류기, Structured Output으로 라우팅 결정, 웹 검색 vs 벡터 검색 분기"
+        },
+        {
+          "id": "03-03-하이브리드-검색-전략",
+          "title": "03. 하이브리드 검색 전략",
+          "file": "13-ch13-adaptive-rag와-동적-라우팅/03-03-하이브리드-검색-전략.md",
+          "description": "벡터 검색 + BM25 앙상블, Reciprocal Rank Fusion, 검색 결과 재순위화(Re-ranking)"
+        },
+        {
+          "id": "04-04-반복적-검색과-자기교정-통합",
+          "title": "04. 반복적 검색과 자기교정 통합",
+          "file": "13-ch13-adaptive-rag와-동적-라우팅/04-04-반복적-검색과-자기교정-통합.md",
+          "description": "Iterative RAG 루프, 쿼리 재작성(Query Rewriting), 다중 소스 검색 병합, 답변 품질 임계값"
+        },
+        {
+          "id": "05-05-adaptive-rag-실전-프로젝트",
+          "title": "05. Adaptive RAG 실전 프로젝트",
+          "file": "13-ch13-adaptive-rag와-동적-라우팅/05-05-adaptive-rag-실전-프로젝트.md",
+          "description": "법률 문서 검색 시스템: 쿼리 복잡도에 따른 동적 검색 전략 적용"
+        }
+      ]
+    },
+    {
+      "id": "14-ch14-graphrag와-knowledge-graph",
+      "title": "Ch14. GraphRAG와 Knowledge Graph",
+      "description": "Microsoft GraphRAG와 지식 그래프를 활용한 고급 RAG 시스템을 학습하고, 복잡한 질의에 대한 구조화된 지식 검색을 구현한다.",
+      "sections": [
+        {
+          "id": "01-01-graphrag-이론과-아키텍처",
+          "title": "01. GraphRAG 이론과 아키텍처",
+          "file": "14-ch14-graphrag와-knowledge-graph/01-01-graphrag-이론과-아키텍처.md",
+          "description": "Microsoft GraphRAG 논문 핵심, 엔티티-관계 추출, 커뮤니티 탐지, 글로벌/로컬 검색 전략"
+        },
+        {
+          "id": "02-02-지식-그래프-구축-파이프라인",
+          "title": "02. 지식 그래프 구축 파이프라인",
+          "file": "14-ch14-graphrag와-knowledge-graph/02-02-지식-그래프-구축-파이프라인.md",
+          "description": "LLM 기반 엔티티/관계 추출, 그래프 인덱싱, 커뮤니티 요약 생성, 비용 최적화"
+        },
+        {
+          "id": "03-03-neo4j-기반-knowledge-graph-rag",
+          "title": "03. Neo4j 기반 Knowledge Graph RAG",
+          "file": "14-ch14-graphrag와-knowledge-graph/03-03-neo4j-기반-knowledge-graph-rag.md",
+          "description": "Neo4j 설정, Cypher 쿼리 기반 검색, LLM의 그래프 쿼리 생성, Text2Cypher 패턴"
+        },
+        {
+          "id": "04-04-하이브리드-rag-설계",
+          "title": "04. 하이브리드 RAG 설계",
+          "file": "14-ch14-graphrag와-knowledge-graph/04-04-하이브리드-rag-설계.md",
+          "description": "벡터 RAG + GraphRAG 결합, 쿼리 유형별 라우팅, 결과 병합 전략, 성능 비교"
+        },
+        {
+          "id": "05-05-graphrag-실전-프로젝트",
+          "title": "05. GraphRAG 실전 프로젝트",
+          "file": "14-ch14-graphrag와-knowledge-graph/05-05-graphrag-실전-프로젝트.md",
+          "description": "연구 논문 분석 시스템: 논문 간 관계 그래프 구축과 구조화된 질의응답"
+        }
+      ]
+    },
+    {
+      "id": "15-ch15-supervisorworker-멀티-에이전트",
+      "title": "Ch15. Supervisor/Worker 멀티 에이전트",
+      "description": "Supervisor가 Worker 에이전트를 지휘하는 계층적 멀티 에이전트 시스템을 LangGraph로 구축한다.",
+      "sections": [
+        {
+          "id": "01-01-멀티-에이전트-아키텍처-패턴",
+          "title": "01. 멀티 에이전트 아키텍처 패턴",
+          "file": "15-ch15-supervisorworker-멀티-에이전트/01-01-멀티-에이전트-아키텍처-패턴.md",
+          "description": "Supervisor/Worker, Swarm, 계층적 구조, 에이전트 간 통신 패턴 비교"
+        },
+        {
+          "id": "02-02-langgraph-supervisor-활용",
+          "title": "02. langgraph-supervisor 활용",
+          "file": "15-ch15-supervisorworker-멀티-에이전트/02-02-langgraph-supervisor-활용.md",
+          "description": "create_supervisor로 Supervisor 에이전트 생성, Worker 등록, 라우팅 전략 설정"
+        },
+        {
+          "id": "03-03-에이전트-핸드오프와-상태-공유",
+          "title": "03. 에이전트 핸드오프와 상태 공유",
+          "file": "15-ch15-supervisorworker-멀티-에이전트/03-03-에이전트-핸드오프와-상태-공유.md",
+          "description": "Worker 간 메시지 전달, 공유 상태 설계, 핸드오프 조건, 결과 집계 패턴"
+        },
+        {
+          "id": "04-04-계층적-멀티-에이전트",
+          "title": "04. 계층적 멀티 에이전트",
+          "file": "15-ch15-supervisorworker-멀티-에이전트/04-04-계층적-멀티-에이전트.md",
+          "description": "중첩 Supervisor 구조, 팀 기반 에이전트 조직, 위임과 에스컬레이션 패턴"
+        },
+        {
+          "id": "05-05-멀티-에이전트-실전-프로젝트",
+          "title": "05. 멀티 에이전트 실전 프로젝트",
+          "file": "15-ch15-supervisorworker-멀티-에이전트/05-05-멀티-에이전트-실전-프로젝트.md",
+          "description": "리서치 팀 에이전트: Supervisor + 검색/분석/작성 Worker 협업 시스템 구축"
+        }
+      ]
+    },
+    {
+      "id": "16-ch16-crewai와-langgraph-비교",
+      "title": "Ch16. CrewAI와 LangGraph 비교",
+      "description": "CrewAI의 역할 기반 에이전트 프레임워크를 학습하고, LangGraph와의 아키텍처·사용성·성능을 비교 분석한다.",
+      "sections": [
+        {
+          "id": "01-01-crewai-기초",
+          "title": "01. CrewAI 기초",
+          "file": "16-ch16-crewai와-langgraph-비교/01-01-crewai-기초.md",
+          "description": "CrewAI 설치, Agent/Task/Crew 핵심 개념, 역할·목표·배경 설정, 프로세스(순차/계층적)"
+        },
+        {
+          "id": "02-02-crewai-flows와-프로덕션-워크플로우",
+          "title": "02. CrewAI Flows와 프로덕션 워크플로우",
+          "file": "16-ch16-crewai와-langgraph-비교/02-02-crewai-flows와-프로덕션-워크플로우.md",
+          "description": "Flows 아키텍처, @start/@listen 데코레이터, 상태 관리, Crews와 Flows 결합"
+        },
+        {
+          "id": "03-03-crewai-vs-langgraph-심층-비교",
+          "title": "03. CrewAI vs LangGraph 심층 비교",
+          "file": "16-ch16-crewai와-langgraph-비교/03-03-crewai-vs-langgraph-심층-비교.md",
+          "description": "아키텍처 비교, 유연성 vs 편의성, 성능 벤치마크, 커뮤니티·생태계, 적합한 사용 사례"
+        },
+        {
+          "id": "04-04-프레임워크-선택-가이드",
+          "title": "04. 프레임워크 선택 가이드",
+          "file": "16-ch16-crewai와-langgraph-비교/04-04-프레임워크-선택-가이드.md",
+          "description": "프로젝트 요구사항별 프레임워크 선택 기준, 마이그레이션 전략, 하이브리드 접근법"
+        }
+      ]
+    },
+    {
+      "id": "17-ch17-에이전트-평가와-langsmith",
+      "title": "Ch17. 에이전트 평가와 LangSmith",
+      "description": "LangSmith를 활용한 에이전트 평가 전략을 학습하고, 오프라인/온라인 평가, LLM-as-Judge, 멀티턴 평가를 실습한다.",
+      "sections": [
+        {
+          "id": "01-01-에이전트-평가-전략",
+          "title": "01. 에이전트 평가 전략",
+          "file": "17-ch17-에이전트-평가와-langsmith/01-01-에이전트-평가-전략.md",
+          "description": "에이전트 평가의 어려움, 결과 vs 궤적 평가, 단일턴 vs 멀티턴, 평가 프레임워크 설계"
+        },
+        {
+          "id": "02-02-langsmith-데이터셋과-오프라인-평가",
+          "title": "02. LangSmith 데이터셋과 오프라인 평가",
+          "file": "17-ch17-에이전트-평가와-langsmith/02-02-langsmith-데이터셋과-오프라인-평가.md",
+          "description": "데이터셋 생성, 평가 함수 작성, evaluate() 실행, 결과 분석과 비교"
+        },
+        {
+          "id": "03-03-llm-as-judge-평가",
+          "title": "03. LLM-as-Judge 평가",
+          "file": "17-ch17-에이전트-평가와-langsmith/03-03-llm-as-judge-평가.md",
+          "description": "LLM 기반 자동 평가, 커스텀 평가 기준 설계, Pairwise 비교 평가, 평가자 일관성 검증"
+        },
+        {
+          "id": "04-04-멀티턴-궤적-평가",
+          "title": "04. 멀티턴 궤적 평가",
+          "file": "17-ch17-에이전트-평가와-langsmith/04-04-멀티턴-궤적-평가.md",
+          "description": "에이전트 궤적(Trajectory) 수집, 도구 호출 시퀀스 평가, 중간 단계 품질 측정"
+        },
+        {
+          "id": "05-05-cicd-통합-평가",
+          "title": "05. CI/CD 통합 평가",
+          "file": "17-ch17-에이전트-평가와-langsmith/05-05-cicd-통합-평가.md",
+          "description": "평가를 CI 파이프라인에 통합, 회귀 테스트 자동화, 성능 임계값 설정, 배포 게이트"
+        }
+      ]
+    },
+    {
+      "id": "18-ch18-관찰가능성과-디버깅",
+      "title": "Ch18. 관찰가능성과 디버깅",
+      "description": "LangSmith의 분산 트레이싱과 모니터링으로 에이전트의 실행을 가시화하고, 성능 병목과 에러를 진단하는 방법을 학습한다.",
+      "sections": [
+        {
+          "id": "01-01-langsmith-트레이싱-설정",
+          "title": "01. LangSmith 트레이싱 설정",
+          "file": "18-ch18-관찰가능성과-디버깅/01-01-langsmith-트레이싱-설정.md",
+          "description": "LANGSMITH_TRACING 환경변수, @traceable 데코레이터, 트레이스/스팬 구조, 메타데이터 태깅"
+        },
+        {
+          "id": "02-02-트레이스-분석과-디버깅",
+          "title": "02. 트레이스 분석과 디버깅",
+          "file": "18-ch18-관찰가능성과-디버깅/02-02-트레이스-분석과-디버깅.md",
+          "description": "트레이스 뷰어 활용, LLM 호출 입출력 검사, 도구 실행 시간 분석, 에러 추적"
+        },
+        {
+          "id": "03-03-비용과-성능-모니터링",
+          "title": "03. 비용과 성능 모니터링",
+          "file": "18-ch18-관찰가능성과-디버깅/03-03-비용과-성능-모니터링.md",
+          "description": "토큰 사용량 추적, 비용 대시보드, 지연 시간 분석, Insights Agent 활용"
+        },
+        {
+          "id": "04-04-프로덕션-모니터링-전략",
+          "title": "04. 프로덕션 모니터링 전략",
+          "file": "18-ch18-관찰가능성과-디버깅/04-04-프로덕션-모니터링-전략.md",
+          "description": "온라인 평가 규칙 설정, 알림 구성, 샘플링 전략, 로그 보존 정책, 멀티 환경 관리"
+        }
+      ]
+    },
+    {
+      "id": "19-ch19-가드레일과-structured-output",
+      "title": "Ch19. 가드레일과 Structured Output",
+      "description": "에이전트의 안전한 출력을 보장하는 가드레일 시스템과 Pydantic 기반 Structured Output을 학습한다.",
+      "sections": [
+        {
+          "id": "01-01-에이전트-가드레일-설계",
+          "title": "01. 에이전트 가드레일 설계",
+          "file": "19-ch19-가드레일과-structured-output/01-01-에이전트-가드레일-설계.md",
+          "description": "가드레일의 종류(입력/출력/도구), 적용 위치, LangGraph 노드로 가드레일 구현"
+        },
+        {
+          "id": "02-02-입력-검증과-프롬프트-인젝션-방어",
+          "title": "02. 입력 검증과 프롬프트 인젝션 방어",
+          "file": "19-ch19-가드레일과-structured-output/02-02-입력-검증과-프롬프트-인젝션-방어.md",
+          "description": "사용자 입력 필터링, 프롬프트 인젝션 탐지, 토픽 제한, 입력 정규화"
+        },
+        {
+          "id": "03-03-structured-output-기초",
+          "title": "03. Structured Output 기초",
+          "file": "19-ch19-가드레일과-structured-output/03-03-structured-output-기초.md",
+          "description": "with_structured_output API, Pydantic 모델 정의, JSON Schema 기반 출력 강제, 파싱 에러 처리"
+        },
+        {
+          "id": "04-04-langgraph에서의-structured-output",
+          "title": "04. LangGraph에서의 Structured Output",
+          "file": "19-ch19-가드레일과-structured-output/04-04-langgraph에서의-structured-output.md",
+          "description": "그래프 노드에서 구조화된 출력, 도구 응답 스키마 강제, 중간 상태의 구조화, 타입 안전성"
+        },
+        {
+          "id": "05-05-가드레일-통합-실습",
+          "title": "05. 가드레일 통합 실습",
+          "file": "19-ch19-가드레일과-structured-output/05-05-가드레일-통합-실습.md",
+          "description": "금융 상담 에이전트: 입력 검증 + 출력 구조화 + 민감정보 필터링 통합 시스템"
+        }
+      ]
+    },
+    {
+      "id": "20-ch20-fastapi-배포와-프로덕션-운영",
+      "title": "Ch20. FastAPI 배포와 프로덕션 운영",
+      "description": "LangGraph 에이전트를 FastAPI로 배포하고, 스트리밍 응답, 인증, 스케일링 등 프로덕션 운영에 필요한 모든 것을 학습한다.",
+      "sections": [
+        {
+          "id": "01-01-fastapi-langgraph-통합",
+          "title": "01. FastAPI + LangGraph 통합",
+          "file": "20-ch20-fastapi-배포와-프로덕션-운영/01-01-fastapi-langgraph-통합.md",
+          "description": "FastAPI 프로젝트 구조, LangGraph 에이전트 래핑, 동기/비동기 엔드포인트 설계"
+        },
+        {
+          "id": "02-02-스트리밍-응답-구현",
+          "title": "02. 스트리밍 응답 구현",
+          "file": "20-ch20-fastapi-배포와-프로덕션-운영/02-02-스트리밍-응답-구현.md",
+          "description": "SSE(Server-Sent Events) 스트리밍, WebSocket 실시간 통신, 토큰 단위 스트리밍, 중간 상태 전송"
+        },
+        {
+          "id": "03-03-인증과-보안",
+          "title": "03. 인증과 보안",
+          "file": "20-ch20-fastapi-배포와-프로덕션-운영/03-03-인증과-보안.md",
+          "description": "JWT 기반 인증, API 키 관리, rate limiting, CORS 설정, 입력 검증과 보안 미들웨어"
+        },
+        {
+          "id": "04-04-확장성과-운영",
+          "title": "04. 확장성과 운영",
+          "file": "20-ch20-fastapi-배포와-프로덕션-운영/04-04-확장성과-운영.md",
+          "description": "비동기 처리와 큐잉, 수평 스케일링, 체크포인트 외부 저장소(PostgreSQL), 헬스체크와 그레이스풀 셧다운"
+        },
+        {
+          "id": "05-05-프로덕션-배포-실전",
+          "title": "05. 프로덕션 배포 실전",
+          "file": "20-ch20-fastapi-배포와-프로덕션-운영/05-05-프로덕션-배포-실전.md",
+          "description": "Docker 컨테이너화, CI/CD 파이프라인, LangGraph Platform 비교, 모니터링 통합, 종합 아키텍처 리뷰"
+        }
+      ]
+    }
+  ],
+  "resources": {}
+}
